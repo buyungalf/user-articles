@@ -6,6 +6,9 @@ import morgan from "morgan";
 import { errorHandler } from "./middleware/errorHandler.js";
 import connectDB from "./db/connect.js";
 
+import swaggerUi from "swagger-ui-express";
+import swaggerSpec from "./config/swagger.js";
+
 import authRoutes from "./routes/auth.routes.js";
 import userRoutes from "./routes/user.routes.js";
 import articleRoutes from "./routes/article.routes.js";
@@ -35,10 +38,11 @@ app.use("/api/users", userRoutes);
 app.use("/api/articles", articleRoutes);
 app.use("/api/page-view", pageViewRoutes);
 
-// Health check / basic route
-app.get("/", (req, res) => {
-  res.status(200).json({ message: "API is running" });
-});
+app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+// app.get("/", (req, res) => {
+//   res.status(200).json({ message: "API is running" });
+// });
 
 app.use(errorHandler);
 
@@ -47,10 +51,10 @@ const start = async () => {
   try {
     await connectDB(MONGO_URI);
     app.listen(PORT, () => {
-      console.log(`Server running on http://localhost:${PORT}`);
+      console.log(`[LOG] Server running on http://localhost:${PORT}`);
     });
   } catch (error) {
-    console.error("Failed to start server:", error);
+    console.error("[LOG] Failed to start server:", error);
     process.exit(1);
   }
 };
