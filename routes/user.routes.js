@@ -16,7 +16,7 @@ router.get("/:id", getUserById);
 
 // Protected
 router.post("/", authenticate, createUser);
-router.put("/:id", authenticate, updateUser);
+router.patch("/:id", authenticate, updateUser);
 router.delete("/:id", authenticate, deleteUser);
 
 export default router;

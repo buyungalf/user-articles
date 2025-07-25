@@ -9,6 +9,7 @@ import connectDB from "./db/connect.js";
 import authRoutes from "./routes/auth.routes.js";
 import userRoutes from "./routes/user.routes.js";
 import articleRoutes from "./routes/article.routes.js";
+import pageViewRoutes from "./routes/pageView.routes.js";
 
 // Load environment variables
 dotenv.config();
@@ -32,6 +33,7 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/articles", articleRoutes);
+app.use("/api/page-view", pageViewRoutes);
 
 // Health check / basic route
 app.get("/", (req, res) => {

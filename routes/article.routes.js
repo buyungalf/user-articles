@@ -16,7 +16,7 @@ router.get("/:id", getArticleById);
 
 // Protected
 router.post("/", authenticate, createArticle);
-router.put("/:id", authenticate, updateArticle);
+router.patch("/:id", authenticate, updateArticle);
 router.delete("/:id", authenticate, deleteArticle);
 
 export default router;
