@@ -51,7 +51,7 @@ const HOST = process.env.NODE_ENV !== "production" ? "localhost" : "0.0.0.0";
 const start = async () => {
   try {
     await connectDB(MONGO_URI);
-    app.listen(PORT, () => {
+    app.listen(PORT, HOST, () => {
       console.log(`[LOG] Server running on http://${HOST}:${PORT}`);
     });
   } catch (error) {
