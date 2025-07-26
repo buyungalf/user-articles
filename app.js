@@ -40,17 +40,20 @@ app.use("/api/page-view", pageViewRoutes);
 
 // Swagger UI setup
 const swaggerUiOptions = {
-  customSiteTitle: "MySkill API Documentation",
+  customSiteTitle: "API Documentation",
   customCss: ".swagger-ui .topbar { display: none }",
   swaggerOptions: {
     urls: [
       {
         url: "/swagger.json",
-        name: "API",
+        name: "API Spec",
       },
     ],
-    oauth2RedirectUrl: `http://${HOST}:${PORT}/api-docs/oauth2-redirect.html`,
-    validatorUrl: null,
+    oauth2RedirectUrl: `http://${
+      process.env.NODE_ENV !== "production" ? "localhost" : "0.0.0.0"
+    }:${PORT}/api-docs/oauth2-redirect.html`,
+    validatorUrl: null, // Disable validator
+    supportedSubmitMethods: [], // Disable "Try it out" if not needed
   },
 };
 
