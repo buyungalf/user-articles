@@ -57,8 +57,8 @@ Token JWT bisa diperoleh dari endpoint login.
 
 ## Jalankan dengan Docker (Opsional)
 ```bash
-docker build -t article-api .
-docker run -p 3000:3000 --env-file .env article-api
+docker build -t user-articles .
+docker run -p 3000:3000 --env-file .env user-articles
 ```
 
 ## 🧾 Catatan Tambahan
