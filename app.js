@@ -39,7 +39,7 @@ app.use("/api/articles", articleRoutes);
 app.use("/api/page-view", pageViewRoutes);
 
 // Swagger UI setup
-app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
   explorer: true,
   swaggerOptions: {
     url: "/swagger.json",
