@@ -39,12 +39,26 @@ app.use("/api/articles", articleRoutes);
 app.use("/api/page-view", pageViewRoutes);
 
 // Swagger UI setup
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
-  explorer: true,
+const swaggerUiOptions = {
+  customSiteTitle: "MySkill API Documentation",
+  customCss: ".swagger-ui .topbar { display: none }",
   swaggerOptions: {
-    url: "/swagger.json",
+    urls: [
+      {
+        url: "/swagger.json",
+        name: "API",
+      },
+    ],
+    oauth2RedirectUrl: `http://${HOST}:${PORT}/api-docs/oauth2-redirect.html`,
+    validatorUrl: null,
   },
-}));
+};
+
+app.use(
+  "/api-docs",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerSpec, swaggerUiOptions)
+);
 
 app.get("/swagger.json", (req, res) => {
   res.setHeader("Content-Type", "application/json");
