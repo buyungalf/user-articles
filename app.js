@@ -38,11 +38,22 @@ app.use("/api/users", userRoutes);
 app.use("/api/articles", articleRoutes);
 app.use("/api/page-view", pageViewRoutes);
 
-app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+// Swagger UI setup
+app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
+  explorer: true,
+  swaggerOptions: {
+    url: "/swagger.json",
+  },
+}));
 
-// app.get("/", (req, res) => {
-//   res.status(200).json({ message: "API is running" });
-// });
+app.get("/swagger.json", (req, res) => {
+  res.setHeader("Content-Type", "application/json");
+  res.send(swaggerSpec);
+});
+
+app.get("/", (req, res) => {
+  res.status(200).json({ message: "API is running" });
+});
 
 app.use(errorHandler);
 const HOST = process.env.NODE_ENV !== "production" ? "localhost" : "0.0.0.0";
