@@ -26,9 +26,13 @@ const options = {
     security: [{ bearerAuth: [] }],
     servers: [
       {
-        url: "http://localhost:3000",
+        url: `http://${process.env.HOST || "localhost"}:${
+          process.env.PORT || 5000
+        }`,
+        description: "Local server",
       },
     ],
+    schemes: ["http"],
   },
   apis: ["./routes/*.js", "./controllers/*.js"],
 };

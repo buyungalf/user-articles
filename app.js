@@ -38,34 +38,29 @@ app.use("/api/users", userRoutes);
 app.use("/api/articles", articleRoutes);
 app.use("/api/page-view", pageViewRoutes);
 
+const HOST = process.env.NODE_ENV !== "production" ? "localhost" : "0.0.0.0";
+
 // Swagger UI setup
-const swaggerUiOptions = {
-  customSiteTitle: "API Documentation",
-  customCss: ".swagger-ui .topbar { display: none }",
+const swaggerHtml = swaggerUi.generateHTML(swaggerSpec, {
+  customSiteTitle: "API Docs",
   swaggerOptions: {
-    urls: [
-      {
-        url: "/swagger.json",
-        name: "API Spec",
-      },
-    ],
-    oauth2RedirectUrl: `http://${
-      process.env.NODE_ENV !== "production" ? "localhost" : "0.0.0.0"
-    }:${PORT}/api-docs/oauth2-redirect.html`,
-    validatorUrl: null, // Disable validator
-    supportedSubmitMethods: [], // Disable "Try it out" if not needed
+    url: "/swagger.json",
+    oauth2RedirectUrl: `http://${HOST}:${PORT}/api-docs/oauth2-redirect.html`,
+    validatorUrl: null,
   },
-};
+});
 
 app.use(
   "/api-docs",
-  swaggerUi.serve,
-  swaggerUi.setup(swaggerSpec, swaggerUiOptions)
+  swaggerUi.serveFiles(swaggerSpec, {
+    swaggerOptions: {
+      url: "/swagger.json",
+    },
+  })
 );
 
-app.get("/swagger.json", (req, res) => {
-  res.setHeader("Content-Type", "application/json");
-  res.send(swaggerSpec);
+app.get("/api-docs", (req, res) => {
+  res.send(swaggerHtml.replace(/https:/g, "http:"));
 });
 
 app.get("/", (req, res) => {
@@ -73,7 +68,6 @@ app.get("/", (req, res) => {
 });
 
 app.use(errorHandler);
-const HOST = process.env.NODE_ENV !== "production" ? "localhost" : "0.0.0.0";
 
 // Start server
 const start = async () => {
