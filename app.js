@@ -45,13 +45,14 @@ app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 // });
 
 app.use(errorHandler);
+const HOST = process.env.NODE_ENV !== "production" ? "localhost" : "0.0.0.0";
 
 // Start server
 const start = async () => {
   try {
     await connectDB(MONGO_URI);
     app.listen(PORT, () => {
-      console.log(`[LOG] Server running on http://localhost:${PORT}`);
+      console.log(`[LOG] Server running on http://${HOST}:${PORT}`);
     });
   } catch (error) {
     console.error("[LOG] Failed to start server:", error);
