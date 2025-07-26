@@ -19,15 +19,15 @@ API ini menyediakan fitur manajemen artikel (draft & published), serta pencatata
 ###  1. Clone Repo
 
 ```bash
-git clone https://github.com/username/article-api.git
-cd article-api
+git clone https://github.com/buyungalf/user-articles.git
+cd user-articles
 
 npm install
 ```
 
 ### 2. Buat File .env
 ```bash PORT=3000
-MONGO_URI=mongodb://localhost:27017/article-db
+MONGO_URI=mongodb://localhost:27017/user-articles
 JWT_SECRET=supersecretkey
 ```
 
