@@ -72,10 +72,10 @@ router.get("/:id", getArticleById);
  *             properties:
  *               title:
  *                 type: string
- *                 example: Cara Menjadi Programmer Hebat
+ *                 example: Cara berdiskusi dengan tetangga
  *               content:
  *                 type: string
- *                 example: Belajar setiap hari dan praktek rutin...
+ *                 example: Bilas muka gosok gigi diskusi
  *               status:
  *                 type: string
  *                 enum: [draft, published]
@@ -122,7 +122,7 @@ router.post("/", authenticate, createArticle);
  *       200:
  *         description: Artikel berhasil diperbarui
  *       403:
- *         description: Akses ditolak (bukan author)
+ *         description: Akses ditolak
  *       404:
  *         description: Artikel tidak ditemukan
  */
@@ -147,7 +147,7 @@ router.patch("/:id", authenticate, updateArticle);
  *       200:
  *         description: Artikel berhasil dihapus
  *       403:
- *         description: Akses ditolak (bukan author)
+ *         description: Akses ditolak
  *       404:
  *         description: Artikel tidak ditemukan
  */

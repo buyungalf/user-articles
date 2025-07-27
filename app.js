@@ -64,7 +64,12 @@ app.get("/api-docs", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  res.status(200).json({ message: "API is running" });
+  res.status(200).json({
+    message: "API is running",
+    swagger: "/api-docs",
+    postman:
+      "https://drive.google.com/file/d/1olFinEW2pX-Yr_7cua-a-5eAcXr2zjuH/view?usp=sharing",
+  });
 });
 
 app.use(errorHandler);
